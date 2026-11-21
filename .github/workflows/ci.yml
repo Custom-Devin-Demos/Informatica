@@ -16,7 +16,7 @@ jobs:
   test:
     name: pytest (local Spark + Delta, no workspace)
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
       PYSPARK_PYTHON: python
       # conftest.py resolves the Delta jar from this mirror first (Maven Central can return 429).
