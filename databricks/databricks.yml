@@ -1,0 +1,83 @@
+# Databricks Asset Bundle for the BIIS lakehouse (replaces the PowerCenter repository / Workflow Manager).
+#   databricks bundle validate -t dev && databricks bundle deploy -t dev
+# Jobs and PowerCenter parameter variables are generated from XML/* into resources/ by resources/generate.py.
+bundle:
+  name: biis_lakehouse
+
+include:
+  - resources/*.yml
+
+artifacts:
+  biis_lakehouse:
+    type: whl
+    path: .
+    build: python -m pip wheel --no-deps --wheel-dir dist .
+
+variables:
+  catalog:
+    description: Unity Catalog catalog holding the biis / histdba / nknight / ehrp schemas (replaces $DBConnection_*).
+    default: biis_dev
+  landing_root:
+    description: UC Volume replacing $Param_Root_Directory/data (int/in, int/out, archive live below it).
+    default: /Volumes/biis_dev/landing/files
+  spark_version:
+    default: 15.4.x-scala2.12
+  node_type_id:
+    default: i3.xlarge
+  num_workers:
+    default: 1
+  schedule_timezone:
+    description: Integration Service time zone for the EHRP2BIIS schedule (PowerCenter stores none; confirm).
+    default: America/New_York
+  ehrp_schedule_pause_status:
+    default: PAUSED
+  ehrp_notification_email:
+    description: Recipient of the s_m_EHRP2BIIS_UPDATE success/failure emails (hard-coded address in the XML).
+    default: biis-ehrp@example.com
+  # --- ops tasks (Transfer Scripts/*, mailx). Secrets come from secret scope ${var.SECRET_SCOPE}, never from here:
+  #     sftp_private_key, sftp_known_hosts, [sftp_private_key_passphrase], [smtp_password].
+  SECRET_SCOPE:
+    default: biis
+  SFTP_HOST:
+    description: Dropbox server of the transfer scripts.
+    default: m1csv301.hhs.gov
+  SFTP_PORT:
+    default: "22"
+  SFTP_USER:
+    description: Account the transfer scripts log in as.
+    default: sa-cdirect
+  SFTP_KEY_HAS_PASSPHRASE:
+    default: "false"
+  SMTP_HOST:
+    description: Mail relay for Email tasks / session emails / transfer notices; empty = log only.
+    default: ""
+  SMTP_PORT:
+    default: "25"
+  SMTP_SENDER:
+    default: biis-lakehouse@example.com
+  SMTP_USER:
+    description: Set to authenticate (STARTTLS) with password secret smtp_password.
+    default: ""
+  TRANSFER_EMAIL_LIST:
+    description: p_mailid of the transfer scripts.
+    default: biis-transfer@example.com
+  FAIL_TASK_ON_COMMAND_ERROR:
+    description: PowerCenter command components use "Fail task if any command fails = NO"; true fails the ops task.
+    default: "false"
+
+targets:
+  dev:
+    mode: development
+    default: true
+    variables:
+      catalog: biis_dev
+      landing_root: /Volumes/biis_dev/landing/files
+
+  prod:
+    mode: production
+    workspace:
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: biis
+      landing_root: /Volumes/biis/landing/files
+      ehrp_schedule_pause_status: UNPAUSED
