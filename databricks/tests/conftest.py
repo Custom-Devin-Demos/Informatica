@@ -19,6 +19,8 @@ def spark(tmp_path_factory):
         .config("spark.sql.warehouse.dir", str(warehouse))
         .config("spark.sql.shuffle.partitions", "1")
         .config("spark.ui.enabled", "false")
+        # The default 1g driver heap thrashes in full GC once the CPM and LES suites share one session.
+        .config("spark.driver.memory", os.environ.get("SPARK_DRIVER_MEMORY", "4g"))
         # Maven Central rate-limits some CI/VM egress; the GCS mirror is tried first.
         .config(
             "spark.jars.repositories",
