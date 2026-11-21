@@ -7,7 +7,7 @@ import pytest
 from biis_lakehouse.pipelines.cpm import wf_cpm
 from biis_lakehouse.pipelines.cpm._helpers import read_flat
 
-from conftest import make_table, vsam_line, write_vsam
+from cpm_support import make_table, vsam_line, write_vsam
 
 
 def _rows(ctx, table, owner=None):
@@ -195,7 +195,7 @@ def _seed(ctx):
 def chain(spark, tmp_path_factory):
     """Run every wf_CPM task in workflow order on one small fixture; snapshot each session's targets."""
     from biis_lakehouse.context import RunContext
-    from conftest import FILES
+    from cpm_support import FILES
 
     ctx = RunContext(spark=spark, catalog=None, landing_root=str(tmp_path_factory.mktemp("cpm") / "landing"))
     ctx.params.update(FILES)
