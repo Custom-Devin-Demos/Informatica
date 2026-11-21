@@ -388,7 +388,7 @@ Session commands (become `ops` tasks / Volume file operations):
 | Expression | 343 | `withColumn` / `select` with `F.expr`; variable ports → chained `withColumn` in port order | Function map below. Variable ports that carry state across rows (e.g. previous-row comparisons) → `Window` + `lag`. |
 | Lookup Procedure (connected) | 112 | `left` join on lookup condition, broadcast for small tables | `Use Any Value`/`Use First Value` (multiple-match) → dedupe lookup with `row_number()` over the condition keys before join; `Lookup SQL Override` → `spark.sql`; uncached (`NO`) lookups have identical semantics in batch. |
 | Unconnected Lookup (`:LKP.x(...)`) | 8 calls | Pre-computed left join, then reference the return column in the expression | Only evaluated rows matter; result equivalent. |
-| Joiner | 27 | `df_master.join(df_detail, cond, how)` | Normal → `inner`; Master Outer → `left` (detail kept); Detail Outer → `right`; Full Outer → `full`. Sorted input ignored. |
+| Joiner | 27 | `df_detail.join(df_master, cond, how)` | Normal → `inner`; Master Outer → `left` (all detail rows kept); Detail Outer → `right` (all master rows kept); Full Outer → `full`. Sorted input ignored. |
 | Aggregator | 29 | `groupBy(group_ports).agg(...)` | Non-aggregated output ports return the *last* row of the group in PC → `F.last(..., ignorenulls=False)` over a deterministic sort; `FIRST`/`LAST` likewise. |
 | Router | 7 | One `.filter(cond)` per output group; DEFAULT group = `~(c1 OR c2 ...)` (null-safe) | A row can satisfy several groups — do not use `when` chains. |
 | Filter | 61 | `.filter(cond)` | PC treats NULL as FALSE, same as Spark. |
