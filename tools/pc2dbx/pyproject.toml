@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pc2dbx"
+version = "0.1.0"
+description = "Convert Informatica PowerCenter XML exports to PySpark/Delta skeletons (biis_lakehouse conventions)"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+pc2dbx = "pc2dbx.cli:main"
+
+[tool.setuptools]
+package-dir = { "pc2dbx" = "." }
+packages = ["pc2dbx"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
