@@ -59,6 +59,11 @@ def spark_type(dt: str, precision: str, scale: str) -> str:
 # non-expression transformations are referenced as ``<instance>__<PORT>`` columns.
 EXTRA_PORTS = {
     "CPM_AFPS": {"m_CPM_AFPS_0400_Crossfoot_Errors": [("exp_Format_Message", "ERROR_CODE")]},
+    "FDA_Leave": {
+        "m_0200_PM_FDA_Create_Insert_200_Rows": [
+            ("exp_Format_200_Records", f"FDA_{n}_DATA") for n in (200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 211, 212, 214, 215)
+        ]
+    },
 }
 
 
@@ -123,7 +128,8 @@ def mapping_specs(folder: ET.Element, mapping: str, target_instances: list[str],
 
 
 def generate(xml_dir: Path, out_dir: Path) -> None:
-    for export, mappings in WANTED.items():
+    for export in {**WANTED, **EXTRA_PORTS}:
+        mappings = WANTED.get(export, {})
         folder = load(xml_dir / export)
         extra = EXTRA_PORTS.get(export, {})
         specs = {m: mapping_specs(folder, m, tgts, extra.get(m, ())) for m, tgts in mappings.items()}
