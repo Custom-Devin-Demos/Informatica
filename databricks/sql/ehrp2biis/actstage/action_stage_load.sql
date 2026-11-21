@@ -1,0 +1,9 @@
+-- action_stage_load.sql — NOT PORTED: the SQL*Plus script run by the actstage_load wrapper
+-- (@ $homedir/action_stage_load, /data/BIISINT/bin/EHRP2BIIS) is not in this repo, and nothing in the
+-- PowerCenter exports reads or writes an "action stage" table, so its logic cannot be inferred.
+-- The wrapper treated the run as successful only when the spool contained "SUCCESS!!!" exactly once; here
+-- success = every statement in this file completes (any Spark error fails the job task).
+-- To port: copy the Oracle script here, translate it to Databricks SQL (see ../afterload/*.sql for the
+-- patterns: ${schema} placeholders, ${load_date} for trunc(sysdate), MERGE for UPDATE/DELETE with
+-- subqueries, DELETE for TRUNCATE) and add a test under databricks/tests/sqlsteps/.
+-- While this file has no statements actstage_load fails (ON_MISSING_PROCEDURE=fail, default) or is skipped.
