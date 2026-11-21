@@ -7,7 +7,7 @@ import pytest
 from biis_lakehouse.pipelines.cpm_extracts import wf_fda_leave as wf
 from biis_lakehouse.pipelines.cpm_extracts._common import out_file
 
-from conftest import make_table, read_lines
+from cpm_extracts_support import make_table, read_lines
 
 T = wf.TASKS
 E1, E2, E3 = "900000001", "900000002", "900000003"

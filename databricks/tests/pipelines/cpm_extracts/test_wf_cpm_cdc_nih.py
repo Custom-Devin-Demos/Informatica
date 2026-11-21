@@ -3,7 +3,7 @@ import pytest
 from biis_lakehouse.pipelines.cpm_extracts import wf_cpm_cdc, wf_cpm_nih
 from biis_lakehouse.pipelines.cpm_extracts._common import out_file
 
-from conftest import newpay_row, read_lines
+from cpm_extracts_support import newpay_row, read_lines
 
 
 def _offsets(fields):
