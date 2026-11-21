@@ -25,7 +25,8 @@ SPECS = {'m_CPM_NIH_Load_CPM_NIH_Header_File': {'nihhdr_WS_NIH_HDR': {'table': '
                                                                          ('LVIISITE_10', 'CHAR', 2, 0, "('93')"),
                                                                          ('TAPE_NUMBER', 'UZONED', 1, 0, '(1)'),
                                                                          ('FILLER_1', 'CHAR', 4037, 0, None)]},
-                                        '_inputs': {'PP_NUM': 'decimal(2,0)'}},
+                                        '_inputs': {'PP_NUM': 'decimal(2,0)'},
+                                        '_ports': {}},
  'm_CPM_NIH_Load_CPM_NIH_Data_File': {'nihtest_NIH_PAYROLL_MASTER': {'table': 'nihtest_NIH_PAYROLL_MASTER',
                                                                      'dbtype': 'PWX_SEQ_NRDB2',
                                                                      'fields': [('SOC_SEC_NO',
@@ -3098,4 +3099,5 @@ SPECS = {'m_CPM_NIH_Load_CPM_NIH_Header_File': {'nihhdr_WS_NIH_HDR': {'table': '
                                                   'YTD_TSPG_GBADIST': 'decimal(7,2)',
                                                   'YTD_TSPG_GMADIST': 'decimal(7,2)',
                                                   'YTD_TSP_OVER50': 'decimal(7,2)',
-                                                  'YTD_UNIF_ALLOW': 'decimal(7,2)'}}}
+                                                  'YTD_UNIF_ALLOW': 'decimal(7,2)'},
+                                      '_ports': {}}}

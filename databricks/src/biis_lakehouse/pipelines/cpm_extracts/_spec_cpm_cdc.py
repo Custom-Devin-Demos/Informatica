@@ -21,7 +21,8 @@ SPECS = {'m_CPM_CDC_Load_CPM_CDC_Header_File': {'cdchdr_WS_CDC_HDR': {'table': '
                                                                          ('LVIISITE_10', 'CHAR', 2, 0, "(' ')"),
                                                                          ('TAPE_NUMBER', 'CHAR', 1, 0, "('1')"),
                                                                          ('FILLER_1', 'CHAR', 2800, 0, None)]},
-                                        '_inputs': {'PP_NUM': 'decimal(2,0)'}},
+                                        '_inputs': {'PP_NUM': 'decimal(2,0)'},
+                                        '_ports': {}},
  'm_CPM_CDC_Load_CPM_CDC_Data_File': {'cdcskel_WS_PAY_OUT_REC': {'table': 'cdcskel_WS_PAY_OUT_REC',
                                                                  'dbtype': 'PWX_SEQ_NRDB2',
                                                                  'fields': [('FIR_NAME_1',
@@ -3493,4 +3494,5 @@ SPECS = {'m_CPM_CDC_Load_CPM_CDC_Header_File': {'cdchdr_WS_CDC_HDR': {'table': '
                                                   'YTD_TSPG_EADIST': 'decimal(7,2)',
                                                   'YTD_TSPG_GBADIST': 'decimal(7,2)',
                                                   'YTD_TSPG_GMADIST': 'decimal(7,2)',
-                                                  'YTD_UNIF_ALLOW': 'decimal(7,2)'}}}
+                                                  'YTD_UNIF_ALLOW': 'decimal(7,2)'},
+                                      '_ports': {}}}

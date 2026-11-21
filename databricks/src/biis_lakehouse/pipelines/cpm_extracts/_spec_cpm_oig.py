@@ -1549,4 +1549,5 @@ SPECS = {'m_CPM_OIG_Load_CPM_OIG_File': {'oigsgndec_SKPAYROLL_MASTER': {'table':
                                              'YTD_MEDC_EMPLR': 'decimal(7,2)',
                                              'YTD_OT_PAY': 'decimal(7,2)',
                                              'YTD_TSPG_GBADIST': 'decimal(7,2)',
-                                             'YTD_TSPG_GMADIST': 'decimal(7,2)'}}}
+                                             'YTD_TSPG_GMADIST': 'decimal(7,2)'},
+                                 '_ports': {}}}

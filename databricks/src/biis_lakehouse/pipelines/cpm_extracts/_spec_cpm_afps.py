@@ -2334,7 +2334,8 @@ SPECS = {'m_CPM_AFPS_0100_Data_Seperate': {'HI_AFPS_FEEDER_TBL': {'table': 'HI_A
                                                'WORK_ADDR_STATE': 'string',
                                                'WORK_ADDR_STREET1': 'string',
                                                'WORK_ADDR_STREET2': 'string',
-                                               'WORK_ADDR_ZIP': 'string'}},
+                                               'WORK_ADDR_ZIP': 'string'},
+                                   '_ports': {}},
  'm_CPM_AFPS_0200_Debridge_To_FEEDER_FLAT': {'feeder_FEEDER_RECORD': {'table': 'feeder_FEEDER_RECORD',
                                                                       'dbtype': 'PWX_SEQ_NRDB2',
                                                                       'fields': [('FPAYROLL_CODE',
@@ -3908,4 +3909,570 @@ SPECS = {'m_CPM_AFPS_0100_Data_Seperate': {'HI_AFPS_FEEDER_TBL': {'table': 'HI_A
                                                          'FUNIF_ALLOW_AMT': 'decimal(7,2)',
                                                          'FUNION_CODE': 'string',
                                                          'FUNION_DED_AMT': 'decimal(7,2)',
-                                                         'FYOC_ADVANCE_REPAY': 'decimal(7,2)'}}}
+                                                         'FYOC_ADVANCE_REPAY': 'decimal(7,2)'},
+                                             '_ports': {}},
+ 'm_CPM_AFPS_0400_Crossfoot_Errors': {'_inputs': {},
+                                      '_ports': {'exp_Format_Message.ERROR_CODE': '((concat(coalesce(concat(coalesce(CAST(`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "AS STRING), ''), coalesce('  ', "
+                                                                                  "'')), ''), coalesce(CAST((CASE WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'AA' THEN 'GROSS PAY    ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'AB' THEN 'NET PAY      ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'AC' THEN 'NET SPECIAL  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'AD' THEN 'NET DECEASED ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'AE' THEN 'GROSS DECEASE' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'AF' THEN 'GARN NET DISP' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'AG' THEN 'GROSS/GARNISH' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EA' THEN 'FLYING       ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EB' THEN 'HIGH WORK    ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EC' THEN 'FLOATING TARG' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ED' THEN 'DIRTY WORK   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EE' THEN 'COLD WORK    ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EF' THEN 'HOT WORK     ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EG' THEN 'WLD HOT METAL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EH' THEN 'MCRO-SLDRNG  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EK' THEN 'HAZ WTHR/TERR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EL' THEN 'UNSHORED WORK' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EM' THEN 'HVER HELICPTR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EN' THEN 'HAZ BOARDING ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EP' THEN 'LIGHTEN G OPS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EQ' THEN 'XTRA HAZ DIVE' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ER' THEN 'DTY-SURF CRFT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ES' THEN 'WORK-EXT HGHT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ET' THEN 'FIBROUS GLASS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EV' THEN 'HIGH VOLTAGE ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'EW' THEN 'WLDG-CNFND SP' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'E1' THEN 'OVERHEIGHT   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'E2' THEN 'SPRY BOOTH OP' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'E3' THEN 'SANDBLASTING ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'E4' THEN 'PAINTERS-ENER' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'E5' THEN 'CARP TRS-ENER' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'E6' THEN 'LIVE LINE MNT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FA' THEN 'DTY-SBMRG VES' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FB' THEN 'EXPLSVS/HIGH ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FC' THEN 'EXPLSVS/LOW  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FD' THEN 'TOXIC CHEM-HI' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FE' THEN 'TOXIC CHEM-LO' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FF' THEN 'MCRO-ORG-HIGH' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FG' THEN 'MCRO-ORG-LOW ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FH' THEN 'PRSSURE CHMBR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FI' THEN 'THERMAL CHMBR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FK' THEN 'FUEL STOR TNK' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FL' THEN 'FIREFIGHTG-HI' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FM' THEN 'FIREFIGHTG-LO' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FN' THEN 'EXP LNDNG/RCV' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FP' THEN 'ABRT-SPACE VE' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FQ' THEN 'DIVING-SKIN  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FR' THEN 'MASS EXPLSVS ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FS' THEN 'AIRCRAFT CARR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FT' THEN 'MSSLE LIQ/SOL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FU' THEN 'DIVER/TENDER ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FV' THEN 'ASBESTOS     ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FW' THEN 'DIVING       ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FX' THEN 'PRSRIZD SONAR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FY' THEN 'NONPRSR SONAR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'FZ' THEN 'EXP PAR JUMPS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'F1' THEN 'ENEMY FIRE   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'F2' THEN 'THRT/BOD HARM' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'F3' THEN 'DESTRCTN AREA' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'F4' THEN 'EXTREME HEAT ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'F5' THEN 'FIREFIGHTING ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'F6' THEN 'EXPLSV HANDLG' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'GM' THEN 'MIL CASH PAYT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'JA' THEN 'COMM GARN INT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'JB' THEN 'GARN ATTY FEE' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'JD' THEN 'LTC DEP PREM?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'JE' THEN 'LTC EE/SPOUS?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'JL' THEN 'FLEX SPEND ??' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'JM' THEN 'FLEX SPEND ??' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'JO' THEN 'PREPD FEHB PR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'JS' THEN 'MAPP G ISSUE?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'JT' THEN 'OVERSEAS TELE' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'JV' THEN 'TSP CATCH-UP?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'KA' THEN 'LVE W/OUT PAY' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'KB' THEN 'SUSPENSION   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'KC' THEN 'ABSENT W/O LV' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'KD' THEN 'OFF/WRKRS CMP' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'KE' THEN 'FURLOUGH     ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'KF' THEN 'NONDTY W/I RS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'KG' THEN 'CALL/ACTV DTY' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MA' THEN 'PANAM-PRE 92 ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MB' THEN 'PANAM-NEW 92 ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MC' THEN 'MUNDIAL LI   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MD' THEN 'MUNDIAL HLTH ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ME' THEN 'PANAMA ES TAX' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MF' THEN 'PANAMA FURNIT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MH' THEN 'PANAMA HOUSNG' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MK' THEN 'KUNA INDN RNT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MP' THEN 'SEGURO HL/MAT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MS' THEN 'SEGURO SOCIAL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MT' THEN 'PANAMA TELE  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'MU' THEN 'PANAMA UTIL  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ND' THEN 'NIGHT DIFF   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'NT' THEN 'TOUR DIF R L?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'OT' THEN 'N/T-TITLE 38?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'OY' THEN 'OT:UNPD ROLUP' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'OZ' THEN 'ZOVERTIME     ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PA' THEN 'LUMP SUM-ANNL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PB' THEN 'LMPSUM-ADV AN' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PC' THEN 'LMPSUM-RST #3' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PD' THEN 'LMPSUM-RST #2' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PE' THEN 'LMPSUM-RST #1' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PF' THEN 'LMPSUM-ADV SK' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PG' THEN 'LUMP SUM-COLA' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PH' THEN 'LMPSUM-PD NF ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PI' THEN 'LMPSUM-PD FOR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PJ' THEN 'LMPSUM-TROPCL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PK' THEN 'LMPSUM-STNDBY' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PL' THEN 'LMPSUM-AUO   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PM' THEN 'LMPSUM-SHFT 2' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PN' THEN 'LMPSUM-SHFT 3' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PO' THEN 'LMPSUM-GUAM  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PP' THEN 'LMPSUM-DANGER' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PR' THEN 'FNLPAY-CR HRS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PS' THEN 'FNLPAY-CP TIM' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PT' THEN 'FNLPAY-REL CP' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PU' THEN 'FNLPAY-AD REL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'PW' THEN 'LMP SUM-AVAIL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'P1' THEN 'FNLPAY-TO AWD' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'P2' THEN 'LMP SUM-POST ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'P3' THEN 'PAYOFF-CP AGE' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'QC' THEN concat(coalesce('FULL "
+                                                                                  "DUE PYD ', ''), "
+                                                                                  'coalesce(CAST(`jnr_Check_For_Records_Not_In_CPM3__PYF_ADJ_DATE_EFF` '
+                                                                                  "AS STRING), '')) WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Q1' THEN 'CURR YR DEBT ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Q2' THEN 'PRI C YR DEBT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Q3' THEN 'PRI P YR DEBT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Q4' THEN 'FEGLI DEBT   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'RA' THEN 'REGULAR      ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UA' THEN 'REEMP ANN OFF' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UB' THEN 'GOV CNTR-CSRS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UC' THEN 'GOV CNTR-FERS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UD' THEN 'GOV CTR-TSP B' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UF' THEN 'GOV CNTR-MEDI' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UG' THEN 'GOV CTR-FEGLI' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UH' THEN 'GOV CNTR-FEHB' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UI' THEN 'GOV CNTR-TSP ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UJ' THEN 'GOV CTR-OASDI' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UK' THEN 'GOV CNTR-SERS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UM' THEN 'GOV CNTR-401K' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UO' THEN 'GOV CTR-PREPD' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UP' THEN 'GOV SEGURO HM' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'US' THEN 'GOV SEGURO SO' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UU' THEN 'GOV-NAF RETIR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UW' THEN 'GOV-TIAA/CREF' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'UX' THEN 'GOV CTR-FIDEL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'U5' THEN 'GOV-DIS INSUR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VB' THEN 'ERNGS/CSRS   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VC' THEN 'ERNGS/FED TAX' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VD' THEN 'ERNGS/ST TAX ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VE' THEN 'ERNGS/LOC TAX' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VF' THEN 'ERNGS/MEDICAR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VG' THEN 'ERNGS/FERS   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VH' THEN 'ERNGS/TSP    ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VI' THEN 'ERNGS/OASDI  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VJ' THEN 'ERNGS/SERS   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VL' THEN 'ERN SBJ FEGLI' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VM' THEN 'ERN SBJ 401K ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VS' THEN 'ERNGS/SEGURO ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VU' THEN 'ERN/NAF RETIR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VW' THEN 'SBJ TIAA/CREF' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'VX' THEN 'SUBJ TO FIDEL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'V6' THEN 'NOT SBJ OASDI' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'V7' THEN 'NOT SBJ MEDIC' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'V8' THEN 'NOT SBJ F TAX' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WA' THEN 'CSRS (ALL)   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WB' THEN 'MEDICARE     ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WD' THEN 'FEDERAL TAX  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WE' THEN 'STATE TAX    ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WF' THEN 'LOCAL TAX    ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WG' THEN 'FEHB         ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WH' THEN 'FEGLI (REG)  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WI' THEN 'FEGLI (OPT A)' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WJ' THEN 'FEGLI (OPT B)' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WK' THEN 'FEGLI (OPT C)' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WL' THEN 'ALLOTMENTS   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WM' THEN 'OASDI        ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WN' THEN 'EIC          ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WO' THEN 'TSP LOANS    ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WP' THEN 'FERS (ALL)   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WQ' THEN 'CSRS (ANNUIT)' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WR' THEN 'FERS (ANNUIT)' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WU' THEN 'NAF RETIREMNT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WV' THEN '401(K) LOANS ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WW' THEN 'TIAA/CREF RET' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'WX' THEN 'FIDELITY RET ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'W1' THEN 'UNION CENT LI' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'W2' THEN 'SRA-TIAA/CREF' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'W3' THEN 'SRA01FIDELITY' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'W4' THEN 'PARKING      ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'W5' THEN 'DISABIL INSUR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'W6' THEN 'LODGING      ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'W7' THEN 'SUBSISTENCE  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'W8' THEN 'TRANSIT      ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'W9' THEN 'VANPOOL      ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XA' THEN 'VOL CHILD SUP' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XB' THEN 'VOL Y ALIMONY' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XC' THEN 'GARN-CH SUPP ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XD' THEN 'GARN-ALIMONY ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XE' THEN 'GRN-ARREAR CS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XF' THEN 'GRN-ARREAR AL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XG' THEN 'TAX LEVY     ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XH' THEN 'CHAP 13 PAYMT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XI' THEN 'VOL BACK TAX ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XJ' THEN 'TRAVEL OVERPA' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XK' THEN 'DCPS MEMO REC' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XL' THEN 'COMM GARN ADM' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XM' THEN 'ADV SAL PAYMT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XN' THEN 'LVE BUY-BACK ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XO' THEN 'FEHB INDEBTED' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XP' THEN 'DOD INVOL IND' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XQ' THEN 'CHARITY      ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XR' THEN 'EMPLOYEE ORGS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XS' THEN 'BONDS        ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XT' THEN 'OVERSEAS ALLT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XU' THEN 'QUARTERS     ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XV' THEN 'TSP          ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XW' THEN 'TSP PRI YEAR ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XX' THEN 'DOD VOL INDBT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XY' THEN 'NON-DOD INVOL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'XZ' THEN 'NON-DOD VOL  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'X1' THEN 'NGAUS INSURAN' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'X2' THEN 'ST ENDRSD/PRI' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'X3' THEN 'SERS TITLE 32' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'X4' THEN 'DEFERRED COMP' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'X5' THEN 'MIL SERV DEP ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'X7' THEN '401K SAVINGS ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'X8' THEN 'GARN-COMMERCI' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YA' THEN 'PRODCTVTY AWD' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YB' THEN 'INT PD-BP AWD' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YC' THEN 'COLA         ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YD' THEN 'POST DIFF(NF)' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YE' THEN 'LIV QUARTRS  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YF' THEN 'POST ALLOW   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YG' THEN 'POST DIFF-FOR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YH' THEN 'SEP MNT ALLOW' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YI' THEN 'SUBS EXP ALLO' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YJ' THEN 'TEMP QRTR SUB' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YK' THEN 'TROPICAL DIFF' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YL' THEN 'BEN ALLW-GTMO' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YM' THEN 'PHYS COMP ALL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YN' THEN 'RMT SIT/OFFSH' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YO' THEN 'RECRUITMNT IN' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YP' THEN 'SEVERANCE PAY' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YR' THEN 'DANGER PAY   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YS' THEN 'SEPARATION IN' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YT' THEN 'STANDBY PREM ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YU' THEN 'ADMIN UNCONTR' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YV' THEN 'BENEF SUGGEST' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YW' THEN 'INCENTIVE AWD' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YX' THEN 'PMRS AWARDS  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YY' THEN 'EXTRACURR PAY' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'YZ' THEN 'EXTRA DUTY   ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Y1' THEN 'TRANSFER ALLW' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Y2' THEN 'EDUC AL/TRAVL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Y3' THEN 'STAFFING DIFF' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Y4' THEN 'RETENTION ALL' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Y5' THEN 'SUPRVSRY DIFF' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Y6' THEN 'RECRUIT BONUS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Y7' THEN 'RELOCAT BONUS' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Y8' THEN 'FOR LANG AWD ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Y9' THEN 'POST SEP-COP ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZE' THEN 'SUNDAY PREM  ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZF' THEN 'HOLIDAY PREM ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZG' THEN 'SHIFT DIFF-2D' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZH' THEN 'SHIFT DIFF-3D' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZL' THEN 'FOR LANG PROF' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZM' THEN 'AVAILABILITY ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZN' THEN 'MD/DDS SPPAY?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZP' THEN 'UNIF M ALLOW?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZS' THEN 'SUN PREM-T38?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZT' THEN 'O/C PAY -T38?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZU' THEN 'HOL PREM-T38?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZV' THEN 'HOL O/T -T38?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZW' THEN 'SAT PREM-T38?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'ZX' THEN 'O/C -TITLE 5?' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Z1' THEN 'FRINGE BENEFT' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Z3' THEN 'IMMIN DANGER ' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Z4' THEN 'SPEC RETENT N' WHEN "
+                                                                                  '`jnr_Check_For_Records_Not_In_CPM3__PYF_PAY_DET_CD` '
+                                                                                  "= 'Z5' THEN 'COND/EMPLOYMT' ELSE "
+                                                                                  "'** NOT FOUND **' END) AS STRING), "
+                                                                                  "''))))"}}}
