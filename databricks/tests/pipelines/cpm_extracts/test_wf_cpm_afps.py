@@ -6,7 +6,7 @@ import pytest
 from biis_lakehouse.pipelines.cpm_extracts import wf_cpm_afps as wf
 from biis_lakehouse.pipelines.cpm_extracts._common import out_file
 
-from conftest import NEWPAY_COLUMNS, PP_NUM, PP_YEAR, make_table, newpay_row, read_lines
+from cpm_extracts_support import NEWPAY_COLUMNS, PP_NUM, PP_YEAR, make_table, newpay_row, read_lines
 
 T = wf.TASKS
 
