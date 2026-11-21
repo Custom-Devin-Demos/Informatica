@@ -13,6 +13,9 @@ from biis_lakehouse.pipelines.cpm_extracts import _spec_cpm_afps, _spec_cpm_cdc,
 PP_YEAR, PP_NUM = 2019, 5
 
 
+PAY_PERIOD_ONLY = {"PP_START_DTE", "PP_END_DTE", "LV_NUM", "LV_YEAR", "PAY_DTE", "CURR_PP_FLAG"}
+
+
 def _newpay_columns() -> dict[str, str]:
     cols = {
         "PP_END_YEAR": "decimal(4,0)",
@@ -27,9 +30,13 @@ def _newpay_columns() -> dict[str, str]:
         (_spec_cpm_oig, "m_CPM_OIG_Load_CPM_OIG_File"),
         (_spec_cpm_cdc, "m_CPM_CDC_Load_CPM_CDC_Data_File"),
         (_spec_cpm_nih, "m_CPM_NIH_Load_CPM_NIH_Data_File"),
+        (_spec_cpm_afps, "m_CPM_AFPS_0100_Data_Seperate"),
     ):
         for name, typ in mod.SPECS[mapping]["_inputs"].items():
-            cols.setdefault(name, typ)
+            if name not in PAY_PERIOD_ONLY:
+                cols.setdefault(name, typ)
+    for name in ("REG_HRS_CPP", "CPP_GROSS_PAY", "CPP_BASE_PAY", "CPP_NET_PAY", "CPP_NET_ALT_DED"):
+        cols.setdefault(name, "decimal(11,2)")
     return cols
 
 

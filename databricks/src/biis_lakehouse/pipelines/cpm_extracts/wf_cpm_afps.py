@@ -24,7 +24,7 @@ from biis_lakehouse.common import delta
 from biis_lakehouse.common.fixed_width import Field
 from biis_lakehouse.context import RunContext
 from biis_lakehouse.pipelines.cpm_extracts import _common
-from biis_lakehouse.pipelines.cpm_extracts._common import PayPeriod, _dec, _num_str
+from biis_lakehouse.pipelines.cpm_extracts._common import _dec, _num_str
 from biis_lakehouse.pipelines.cpm_extracts._pcexpr import bind_params
 from biis_lakehouse.pipelines.cpm_extracts._records import project, write_records
 from biis_lakehouse.pipelines.cpm_extracts._spec_cpm_afps import SPECS
@@ -225,9 +225,10 @@ def s_CPM_AFPS_0400_Crossfoot_Errors(ctx: RunContext) -> None:
         F.col("PYF_ADJ_DATE_EFF").alias("jnr_Check_For_Records_Not_In_CPM3__PYF_ADJ_DATE_EFF"),
     )
     detail = g.filter(F.col("DIFF") != 0).select("PP_END_YEAR", "PP_NUM", "EMPL_ID", "CAN", "TK_NO", "DIFF")
+    # Master = lookup branch, detail = SQ_HI_GROSS_EXP_TBL1; the target takes PP_*/EMPL_ID/CAN1/TK_NO1/DIFF1 from the detail side.
     j = master.join(detail, (master.lkp_PP_END_YEAR == detail.PP_END_YEAR) & (master.lkp_PP_NUM == detail.PP_NUM) & (master.lkp_EMPL_ID == detail.EMPL_ID), "full")
     msg = F.concat(
-        F.lit("CROSSFOOT ERROR FOR SSN "), F.coalesce(F.col("lkp_EMPL_ID"), F.lit("")),
+        F.lit("CROSSFOOT ERROR FOR SSN "), F.coalesce(F.col("EMPL_ID"), F.lit("")),
         F.lit(" CAN "), F.coalesce(F.col("CAN"), F.lit("")),
         F.lit(" TK "), F.coalesce(F.lpad(F.col("TK_NO"), 5, "0"), F.lit("")),
         F.lit(" AMOUNT IS "), F.coalesce(F.col("DIFF").cast("decimal(28,2)").cast("string"), F.lit("")),
@@ -235,10 +236,10 @@ def s_CPM_AFPS_0400_Crossfoot_Errors(ctx: RunContext) -> None:
     out = j.select(
         F.lit(CROSSFOOT_PROCESS).alias("PROCESS_NAME"),
         msg.alias("ERROR_MESSAGE"),
-        F.col("lkp_EMPL_ID").alias("SOURCE_KEY"),
+        F.col("EMPL_ID").alias("SOURCE_KEY"),
         F.current_timestamp().alias("ERROR_DATE"),
-        F.col("lkp_PP_END_YEAR").cast("decimal(4,0)").alias("PP_END_YEAR"),
-        F.col("lkp_PP_NUM").cast("decimal(2,0)").alias("PP_NUM"),
+        F.col("PP_END_YEAR").cast("decimal(4,0)").alias("PP_END_YEAR"),
+        F.col("PP_NUM").cast("decimal(2,0)").alias("PP_NUM"),
         F.lit(ctx.param("WF_CYCLE_ID", "")).cast("decimal(3,0)").alias("CYCLE_ID"),
         F.expr(bind_params(ERROR_CODE_SQL, ctx.params)).alias("ERROR_CODE"),
     )
@@ -279,13 +280,11 @@ def s_CPM_AFPS_0500_Crossfoot_Message_Header(ctx: RunContext) -> dict:
 def s_CPM_AFPS_0600_Crossfoot_Message_Details(ctx: RunContext) -> None:
     """afps_details.txt: one line per crossfoot error, SSN masked as ``XXX-XX-<last 4>``, ordered by SOURCE_KEY."""
     e = _crossfoot_errors(ctx).orderBy("SOURCE_KEY")
-    mask = F.concat(F.lit("XXX-XX-"), F.substring("SOURCE_KEY", 6, 4))
     out = e.select(
         F.when(F.col("SOURCE_KEY").isNull() | (F.col("SOURCE_KEY") == ""), F.col("ERROR_MESSAGE"))
         .otherwise(F.expr("replace(ERROR_MESSAGE, SOURCE_KEY, concat('XXX-XX-', substring(SOURCE_KEY, 6, 4)))")).alias("SUBJECT"),
         F.col("ERROR_CODE").alias("MESSAGE"),
     )
-    del mask
     from biis_lakehouse.common.fixed_width import write_fixed_width
 
     write_fixed_width(out, _common.out_file(ctx, "afps_details.txt"), CROSSFOOT_FILE)
