@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "biis-lakehouse"
+version = "0.1.0"
+description = "Databricks lakehouse port of the BIIS Informatica PowerCenter estate"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pyspark==3.5.3", "delta-spark==3.2.1", "pytest>=7"]
+
+[project.scripts]
+biis-run = "biis_lakehouse.runner:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
