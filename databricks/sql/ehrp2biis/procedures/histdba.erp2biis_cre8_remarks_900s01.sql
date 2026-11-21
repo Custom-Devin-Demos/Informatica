@@ -1,0 +1,7 @@
+-- HISTDBA.ERP2BIIS_CRE8_REMARKS_900S01 — NOT PORTED: the PL/SQL source is not in this repo (it lives in the BIIS Oracle database).
+-- Called by ehrp2biis_afterload.sql via "EXEC HISTDBA.ERP2BIIS_CRE8_REMARKS_900S01;".
+-- To port: extract it (SELECT text FROM dba_source WHERE owner = 'HISTDBA' AND name = 'ERP2BIIS_CRE8_REMARKS_900S01'
+-- ORDER BY line), rewrite as Databricks SQL statements in this file using ${histdba}, ${nknight}, ${biis},
+-- ${ehrp} and ${load_date}, and add a test under databricks/tests/sqlsteps/.
+-- While this file has no statements the afterload fails up front (ON_MISSING_PROCEDURE=fail, default)
+-- or skips it and reports it in EHRP2BIIS_AFTERLOAD_UNPORTED (ON_MISSING_PROCEDURE=skip).
