@@ -8,7 +8,7 @@ from decimal import Decimal
 import pytest
 from pyspark.sql import types as T
 
-from biis_lakehouse.pipelines.cpm._layouts import TABLES, VSAM_LAYOUTS
+from biis_lakehouse.pipelines.cpm._layouts import TABLES
 from biis_lakehouse.pipelines.cpm._helpers import vsam_fields, vsam_record_length
 
 PP = {"WF_PP_END_YEAR": "2024", "WF_PP_NUM": "5", "WF_PP_YEAR_NUM": "202405"}

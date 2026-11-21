@@ -304,6 +304,7 @@ class _Run:
         self.frames[fid] = out.drop(*lk_cols)
 
     def passthrough(self, inst: str, fields):
+        fields = [{**f, "porttype": "INPUT/OUTPUT"} for f in fields]  # mapplet Input/Output ports pass values through
         fid = self._frame_of_inputs(inst)
         df = self._bind_inputs(inst, fields, fid, self.frames[fid])
         for f in fields:
@@ -398,14 +399,15 @@ class _Run:
         fields = tx["fields"]
         fid = self._frame_of_inputs(inst)
         df = self._bind_inputs(inst, fields, fid, self.frames[fid])
-        occurs = {f["name"]: f["occurs"] for f in tx.get("nrm_fields", []) if f["occurs"]}
+        occurs = [f["name"] for f in tx.get("nrm_fields", []) if f["occurs"]]
         ins: dict[str, list[str]] = {}
         for f in fields:
             if f["porttype"] == "INPUT":
                 ins.setdefault(f.get("ref_source_field"), []).append(col(inst, f["name"]))
-        occ_field = next(iter(occurs), None)
-        if occ_field:
-            arr = F.array(*[F.col(q(c)) for c in ins[occ_field]])
+        if occurs:
+            n = max(len(ins[o]) for o in occurs)
+            arr = F.array(*[F.struct(*[(F.col(q(ins[o][i])) if i < len(ins[o]) else F.lit(None)).alias(o) for o in occurs])
+                            for i in range(n)])
             df = df.select("*", F.posexplode(arr).alias("__pos", "__val"))
         start = int(next((f.get("sequence_generator_value") or 1 for f in fields if "GENERATED KEY" in f["porttype"]), 1))
         w = Window.orderBy(SEQ)
@@ -413,12 +415,12 @@ class _Run:
         for f in fields:
             pt, ref = f["porttype"], f.get("ref_source_field")
             if pt == "OUTPUT":
-                sel.append((F.col("__val") if ref == occ_field and occ_field else F.col(q(ins[ref][0]))).alias(col(inst, f["name"])))
+                sel.append((F.col("__val")[ref] if ref in occurs else F.col(q(ins[ref][0]))).alias(col(inst, f["name"])))
             elif "GENERATED COLUMN ID" in pt:
                 sel.append((F.col("__pos") + 1).cast("int").alias(col(inst, f["name"])))
             elif "GENERATED KEY" in pt:
                 sel.append((F.dense_rank().over(w) + start - 1).cast("bigint").alias(col(inst, f["name"])))
-        seq = (F.col(SEQ) * 1000 + F.col("__pos")) if occ_field else F.col(SEQ)
+        seq = (F.col(SEQ) * 1000 + F.col("__pos")) if occurs else F.col(SEQ)
         self.frames[inst] = df.select(*sel, seq.alias(SEQ))
         for f in fields:
             self.where[(inst, f["name"])] = inst
@@ -471,6 +473,9 @@ class _Run:
 def run_mapping(ctx: RunContext, mapping: str, inputs: dict[str, DataFrame], params: dict,
                 lookups: dict[str, DataFrame] | None = None,
                 lookup_owner: Callable[[str], Optional[str]] = lambda table: None) -> MappingResult:
+    # wide mappings (400+ ports through several joiners) need more analyzer passes than the default 100
+    if int(ctx.spark.conf.get("spark.sql.analyzer.maxIterations", "100")) < 1000:
+        ctx.spark.conf.set("spark.sql.analyzer.maxIterations", "1000")
     return _Run(ctx, mapping, inputs, params, lookups or {}, lookup_owner).run()
 
 

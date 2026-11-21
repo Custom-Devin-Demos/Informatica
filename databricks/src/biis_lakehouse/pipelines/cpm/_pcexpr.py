@@ -710,11 +710,6 @@ def compile_py(ast, params: dict, types: dict[str, str], want: str | None = None
                     x, y = a(env), b(env)
                     return (py_str(x) or "") + (py_str(y) or "")
                 return cat
-            ta, tb = typ(n[2]), typ(n[3])
-
-            def norm(v, t):
-                return _dec(v) if t == "n" or isinstance(v, (int, float, bool)) else v
-
             if op in ("=", "!=", "<", "<=", ">", ">="):
                 import operator as o
                 fn = {"=": o.eq, "!=": o.ne, "<": o.lt, "<=": o.le, ">": o.gt, ">=": o.ge}[op]
